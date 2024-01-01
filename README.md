@@ -25,7 +25,7 @@ After the review period, we will open-source the code on our GitHub.
 </div>
 <!-- ![](images/fig1.png#id=UEGkS&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=) -->
 
-### Installation
+### Installations
 
 1. Create a conda environment with Pytorch:
 
