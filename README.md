@@ -21,7 +21,7 @@ After the review period, we will open-source the code on our GitHub.
 ### Overview
 
 <div style="text-align: center">
-<img src="figures/figure2.jpg"/>
+<img src="images/figure2.jpg"/>
 </div>
 
 
