@@ -23,7 +23,7 @@ After the review period, we will open-source the code on our GitHub.
 <div style="text-align: center">
 <img src="figures/figure2.jpg"/>
 </div>
-<!-- ![](images/fig1.png#id=UEGkS&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=) -->
+
 
 ### Key Implementation
 
@@ -115,9 +115,6 @@ Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi
 2. Make directories to store ST (MuST-C) and datasets. Please specify the target language.
 
 
-
-#### Deltalm Prepare
-1.  Download [Vocabulary](https://deltalm.blob.core.windows.net/deltalm/dict.txt), [ Sentencepiece-model](https://deltalm.blob.core.windows.net/deltalm/spm.model) and [Model](https://deltalm.blob.core.windows.net/deltalm/deltalm-base.pt) of deltalm and you need to tokenize raw data to spm data. 
 
 2.  Preprocess spm data. 
 
