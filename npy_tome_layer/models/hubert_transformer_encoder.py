@@ -1182,78 +1182,22 @@ class TransformerEncoder(nn.Module):
                 ):
  
                     x, (z, lr), padding_mask = layer(
-                        x, self_attn_padding_mask=padding_mask, need_weights=False
-                    )
-                    # similarity_list[i] = []
-                    # N, b, c = x.size()
-                    # for cos_index in range(b):
-                    #     cos1 = x[:, cos_index,:].squeeze()[1:, :]
-                    #     cos2 = x[:, cos_index,:].squeeze()[:-1, :]
-                    #     assert cos1.size() == cos2.size()
-                    #     similarity = torch.cosine_similarity(cos1, cos2, dim=1)
-                    #     print(similarity.size())
-                    #     print(f"layer{i}", torch.mean(similarity).item())
-                        # print(similarity)
-                  
-                        # similarity_list[i].append(similarity)
-                    
-                    # print(similarity_list[i])
-                    # print(sum(similarity_list[i]) /len(similarity_list[i]))
-                    # exit()
-                    # print()
-                    # if i >=11:
-                    #     import torch
-                    #     # import numpy as np
+                        x, self_attn_padding_mask=padding_mask, need_weights=False)
 
-
-                    #     attn = z
-                    #     N, b, c = x.size()
-                        
-                    #     attn = attn[1,:,:].squeeze(0)
-                    #     attn = attn.view(N, N)
-                    #     # .sum(dim=1)
-
-                    #     b = attn.cpu().numpy()
-                    #     np.savetxt("test1.csv", b, delimiter=',', fmt='%.2f')
-
-                        # np.savetxt("test.csv",b)
-           
-                    
-                    # import torch.nn.functional as F
-                    
-                    # for token_index in x:
-                                                
-                    #     cos_1 = token_index[0:-1, : ]
-                    #     cos_2 = token_index[1: , : ]
-                    
-                    #     print(F.cosine_similarity(cos_1, cos_2, dim=2))
-                    #     exit()
-                    # self.pruning_rate
-                    # test-1229
-                    low_pruning = 0.7
-                    high_pruning = 0.95
-                    total_layer = 8
-                    if i >=6:
-
+                    if i >=4:
                         N, b, c = x.size()
                         attn = z
                         pruning_scores = attn.view(b, N, N).sum(dim=-1)
                         
                         current_pruning = high_pruning - (high_pruning - low_pruning) * (i - 4) /total_layer
-                        
-                        
-                        # left_tokens = math.ceil(current_pruning * (N)) #  N = token_num
                         left_tokens = math.ceil(0.9 * (N)) #  N = token_num
                 
                         x = x.transpose(0, 1)
                         test, idx = torch.topk(pruning_scores, left_tokens, dim=1, largest=True, sorted=True)  # [B, left_tokens]
                         true_idx, _ = torch.topk(idx, left_tokens, dim=1, largest=False, sorted=True)  # [B, left_tokens] 
-                        
                         index = true_idx.unsqueeze(-1).expand(-1, -1, c)  # [B, left_tokens, C]          
-
                         x = torch.gather(x, dim=1, index=index)  # [B, left_tokens, C]  
-                        # print(but.equal(x))
-                        # assert but.equal(x)
+
                         x = x.transpose(0, 1)  
                         padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
 

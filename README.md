@@ -21,35 +21,62 @@ After the review period, we will open-source the code on our GitHub.
 ### Overview
 
 <div style="text-align: center">
-<img src="images/fig1.png"/>
+<img src="images/figure2.jpg"/>
 </div>
 <!-- ![](images/fig1.png#id=UEGkS&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=) -->
 
+### Key Implementation
+
+
+- Calculate importance scores for all tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1190`;
+- Calculate the remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1192-1193`;
+- Calculate the index of the remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1196-1198`;
+- Use the torch.gather() function to extract all remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1199 `;
+
+
+```
+
+# x: (sequence_length, batch, features_embedding) 
+# attn: (batch, sequence_length,sequence_length)
+
+N, b, c = x.size()
+attn = z
+
+# calculate the import score
+pruning_scores = attn.view(b, N, N).sum(dim=-1)
+
+# calculate the left tokens
+left_tokens = math.ceil(0.9 * (N)) #  N = token_num
+
+x = x.transpose(0, 1)
+
+# select import tokens
+_, idx = torch.topk(pruning_scores, left_tokens, dim=1, largest=True, sorted=True) 
+true_idx, _ = torch.topk(idx, left_tokens, dim=1, largest=False, sorted=True)  # [B, left_tokens] 
+index = true_idx.unsqueeze(-1).expand(-1, -1, c)  # [B, left_tokens, C]          
+x = torch.gather(x, dim=1, index=index)  # [B, left_tokens, C]  
+
+x = x.transpose(0, 1)  
+
+# MASK align
+padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
+
+```
+
 ### Installations
 
-1. Create a conda environment with Pytorch:
+1. Create a conda environment with Pytorch and install fairseq
 
 ```
-conda create --name adapters python=3.9
-conda activate adapters
-```
-
-2. Install fairseq
-
-```bash
+conda create --name pruning python=3.9
+conda activate pruning
 git clone https://github.com/pytorch/fairseq
 cd fairseq
 pip install --editable ./
-
-# Next: Important!
 python setup.py build develop
-```
 
-3. Other operations
+# if you meet the following error, please reinstall the packages
 
-    *Notes: Due to the version compatibility of packages, you also need to reinstall the following packages：*
-
-```bash
 # numpy np.float error 
 pip install numpy==1.23.5
 
@@ -57,9 +84,10 @@ pip install numpy==1.23.5
 pip install sacrebleu==1.5.1
 ```
 
+
 This repository is constructed using the codebase from fairseq. If you require information on the basic usage of fairseq, please refer to the [fairseq documentation](https://fairseq.readthedocs.io/en/latest/).
 
-4. Other requirements
+2. Requirements
 
 - pandas==2.0.3
 - sacrebleu==1.5.1
@@ -80,22 +108,13 @@ This repository is constructed using the codebase from fairseq. If you require i
 <!-- #### Mustc v1 -->
 #### Mustc Datasets Prepare
 
-1. Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi610n3T6diXRlANBbuzShsCje-GtKs1Sngh0YQ/viewform?pli=1) datasets. 
+Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi610n3T6diXRlANBbuzShsCje-GtKs1Sngh0YQ/viewform?pli=1) datasets. 
 
    *Notes: It appears that the original dataset [website](https://www.fbk.eu/en/research-centers/) hides the download link. However the dataset can still be downloaded after filling out the dataset request [form](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi610n3T6diXRlANBbuzShsCje-GtKs1Sngh0YQ/viewform?pli=1) directly. So we recommend that you use this method.*
 
 2. Make directories to store ST (MuST-C) and datasets. Please specify the target language.
 
-```
-TARGET=de
-MUSTC_ROOT=data/mustc
-```
 
-2. Unzip the mustc datasets.
-```
-cd $MUSTC_ROOT
-tar -xzvf MUSTC_v1.0_en-${TARGET}.tar.gz
-```
 
 #### Deltalm Prepare
 1.  Download [Vocabulary](https://deltalm.blob.core.windows.net/deltalm/dict.txt), [ Sentencepiece-model](https://deltalm.blob.core.windows.net/deltalm/spm.model) and [Model](https://deltalm.blob.core.windows.net/deltalm/deltalm-base.pt) of deltalm and you need to tokenize raw data to spm data. 
