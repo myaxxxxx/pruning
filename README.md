@@ -36,30 +36,30 @@ After the review period, we will open-source the code on our GitHub.
 
 ```
 
+
 # x: (sequence_length, batch, features_embedding) 
 # attn: (batch, sequence_length,sequence_length)
 
-N, b, c = x.size()
-attn = z
+if i >= self.pruning_init_layer:
+    N, b, c = x.size()
+    attn = z
+    # calculate the importance scores
+    pruning_scores = attn.view(b, N, N).sum(dim=1)
 
-# calculate the import score
-pruning_scores = attn.view(b, N, N).sum(dim=-1)
+    # calculate the left tokens
+    left_tokens = math.ceil(self.pruning_rate * (N)) #  N = token_num
 
-# calculate the left tokens
-left_tokens = math.ceil(0.9 * (N)) #  N = token_num
+    x = x.transpose(0, 1)
+    # select importance tokens
+    test, idx = torch.topk(pruning_scores, left_tokens, dim=1, largest=True, sorted=True)  # [B, left_tokens]
+    true_idx, _ = torch.topk(idx, left_tokens, dim=1, largest=False, sorted=True)  # [B, left_tokens] 
+    index = true_idx.unsqueeze(-1).expand(-1, -1, c)  # [B, left_tokens, C]          
+    x = torch.gather(x, dim=1, index=index)  # [B, left_tokens, C]  
 
-x = x.transpose(0, 1)
+    x = x.transpose(0, 1)  
+    # MASK align
+    padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
 
-# select import tokens
-_, idx = torch.topk(pruning_scores, left_tokens, dim=1, largest=True, sorted=True) 
-true_idx, _ = torch.topk(idx, left_tokens, dim=1, largest=False, sorted=True)  # [B, left_tokens] 
-index = true_idx.unsqueeze(-1).expand(-1, -1, c)  # [B, left_tokens, C]          
-x = torch.gather(x, dim=1, index=index)  # [B, left_tokens, C]  
-
-x = x.transpose(0, 1)  
-
-# MASK align
-padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
 
 ```
 
