@@ -123,6 +123,7 @@ Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi
 ##### Pruning
 
 ```
+# key args --pruning-rate --pruning-init-layer
 
 export CUDA_VISIBLE_DEVICES=1
 target=de
