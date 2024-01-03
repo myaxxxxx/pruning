@@ -14,7 +14,7 @@ Efficient Speech-to-Text Translation: Progressive Pruning for Accelerated Speech
 </p>
 
 <p align="center">
-Codes for our regular and share adapters for speech-to-text translation tasks (Under review).
+(Under review).
 After the review period, we will open-source the code on our GitHub.
 </p>
 
