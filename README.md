@@ -124,3 +124,10 @@ Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi
 #### Speech Pre-trained Model 
 
 1. We use Hubert model for speech pre-trained model for training. Before training, please download the [HuBERT-Base](https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt) model.
+
+
+
+
+### Acknowledgment
+
+We refer to the code of [Deltalm](https://github.com/microsoft/unilm/tree/master/deltalm). Thanks for their great contributions!
