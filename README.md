@@ -88,7 +88,6 @@ pip install sacrebleu==1.5.1
 This repository is constructed using the codebase from fairseq. If you require information on the basic usage of fairseq, please refer to the [fairseq documentation](https://fairseq.readthedocs.io/en/latest/).
 
 2. Requirements
-
 - pandas==2.0.3
 - sacrebleu==1.5.1
 - scikit-learn==1.3.0
@@ -103,18 +102,13 @@ This repository is constructed using the codebase from fairseq. If you require i
 
 
 ### Datasets and Models
-
-
-<!-- #### Mustc v1 -->
 #### Mustc Datasets Prepare
 
 Please Download [Mustc-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi610n3T6diXRlANBbuzShsCje-GtKs1Sngh0YQ/viewform?pli=1) datasets. 
 
    *Notes: It appears that the original dataset [website](https://www.fbk.eu/en/research-centers/) hides the download link. However the dataset can still be downloaded after filling out the dataset request [form](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxbi610n3T6diXRlANBbuzShsCje-GtKs1Sngh0YQ/viewform?pli=1) directly. So we recommend that you use this method.*
 
-2. Make directories to store ST (MuST-C) and datasets. Please specify the target language.
-
-
+1. Make directories to store ST (MuST-C) and datasets. Please specify the target language.
 
 2.  Preprocess spm data. 
 
