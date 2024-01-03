@@ -1,5 +1,0 @@
- ('encoder.layers.11.self_attn.k_proj', {'version': 1}), ('encoder.layers.11.self_attn.v_proj', {'version': 1}), ('encoder.layers.11.self_attn.out_proj', {'version': 1}), ('encoder.layers.11.self_attn.dropout_layer', {'version': 1}), ('encoder.layers.11.ffn', {'version': 1}), ('encoder.layers.11.ffn.fc1', {'version': 1}), ('encoder.layers.11.ffn.fc2', {'version': 1}), ('encoder.layers.11.ffn.dropout_layer', {'version': 1}), ('encoder.layers.11.self_attn_layer_norm', {'version': 1}), ('encoder.layers.11.dropout_1', {'version': 1}), ('encoder.layers.11.final_layer_norm', {'version': 1}), ('encoder.layers.11.dropout_2', {'version': 1})
-
- 
-
- {'_metadata': OrderedDict([('', {'version': 1}), ('self_attn', {'version': 1}), ('self_attn.dropout_module', {'version': 1}), ('self_attn.k_proj', {'version': 1}), ('self_attn.v_proj', {'version': 1}), ('self_attn.q_proj', {'version': 1}), ('self_attn.out_proj', {'version': 1}), ('self_attn_layer_norm', {'version': 1}), ('dropout_module', {'version': 1}), ('activation_dropout_module', {'version': 1}), ('fc1', {'version': 1}), ('fc2', {'version': 1}), ('final_layer_norm', {'version': 1})])}

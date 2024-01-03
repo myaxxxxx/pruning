@@ -213,6 +213,12 @@ class HubertTransformerModel(FairseqEncoderDecoderModel):
             type=float,
             help="model to take mt encoder/decoder weight from (for initialization)",
         )
+        
+        parser.add_argument(
+            "--pruning-init-layer",
+            type=int,
+            help="model to take mt encoder/decoder weight from (for initialization)",
+        )
 
     @classmethod
     def build_encoder(cls, args, task=None, embed_tokens=None):
@@ -317,7 +323,6 @@ class HubertTransformerEncoder(FairseqEncoder):
         hubert_args.model["_name"] = "pruning_hubert"
         print(hubert_args)
 
-        # hubert_args.pruning_rate = getattr(args, "pruning_rate")
         self.hubert_model = task.build_model(hubert_args.model)
         self.hubert_model.load_state_dict(ckpt["model"])
         
@@ -326,6 +331,7 @@ class HubertTransformerEncoder(FairseqEncoder):
             for param in self.hubert_model.parameters():
                 param.requires_grad = False
         self.hubert_model.encoder.pruning_rate = getattr(args, "pruning_rate")
+        self.hubert_model.encoder.pruning_init_layer = getattr(args, "pruning_init_layer")        
         # speech subsample
         if args.conv_kernel_sizes:
             self.subsampler = Conv1dSubsampler(
@@ -417,9 +423,7 @@ class HubertTransformerEncoder(FairseqEncoder):
         if token_T != pad_T:
             encoder_padding_mask = encoder_padding_mask[:, :token_T]
         
-        # print(x.size())
-        # print(encoder_padding_mask)
-        # print(encoder_padding_mask.size())
+
         encoder_embedding = x
         x = x.transpose(0, 1)  # B x T x C -> T x B x C
 
@@ -529,6 +533,9 @@ def base_architecture(args):
     args.decoder_input_dim = getattr(args, "decoder_input_dim", args.decoder_embed_dim)
     args.no_scale_embedding = getattr(args, "no_scale_embedding", False)
     args.quant_noise_pq = getattr(args, "quant_noise_pq", 0)
+    
+##  add
+    # args.pruning_layer = 
 
 # @register_model_architecture(model_name="hubert_transformer", arch_name="hubert_transformer_postln")
 # def hubert_transformer_postln(args):
