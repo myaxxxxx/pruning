@@ -29,7 +29,7 @@ After the review period, we will open-source the code on our GitHub.
 
 
 - Calculate importance scores for all tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1190`;
-- Calculate the remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1192-1193`;
+- Calculate the remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1192`;
 - Calculate the index of the remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1196-1198`;
 - Use the torch.gather() function to extract all remaining tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1199 `;
 

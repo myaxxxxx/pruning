@@ -1184,27 +1184,20 @@ class TransformerEncoder(nn.Module):
                     x, (z, lr), padding_mask = layer(
                         x, self_attn_padding_mask=padding_mask, need_weights=False
                     )
-
                     if i >= self.pruning_init_layer:
-
                         N, b, c = x.size()
                         attn = z
                         pruning_scores = attn.view(b, N, N).sum(dim=-1)
-
+ 
                         left_tokens = math.ceil(self.pruning_rate * (N)) #  N = token_num
-
-                        
-                        exit()
                 
                         x = x.transpose(0, 1)
+
                         test, idx = torch.topk(pruning_scores, left_tokens, dim=1, largest=True, sorted=True)  # [B, left_tokens]
                         true_idx, _ = torch.topk(idx, left_tokens, dim=1, largest=False, sorted=True)  # [B, left_tokens] 
-                        
                         index = true_idx.unsqueeze(-1).expand(-1, -1, c)  # [B, left_tokens, C]          
-
                         x = torch.gather(x, dim=1, index=index)  # [B, left_tokens, C]  
-                        # print(but.equal(x))
-                        # assert but.equal(x)
+
                         x = x.transpose(0, 1)  
                         padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
 
