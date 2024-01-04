@@ -158,4 +158,4 @@ fairseq-train $data_dir --text-data $TEXT_DIR --tgt-lang $target \
 
 ### Acknowledgment
 
-We refer to the code of [Deltalm](https://github.com/microsoft/unilm/tree/master/deltalm). Thanks for their great contributions!
+We refer to the code of [Hubert](https://github.com/facebookresearch/fairseq/blob/main/examples/hubert/README.md). Thanks for their great contributions!
