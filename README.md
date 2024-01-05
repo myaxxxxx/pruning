@@ -63,7 +63,7 @@ if i >= self.pruning_init_layer:
 
 ### Installations
 
-1. Create a conda environment with Pytorch and install fairseq
+Create a conda environment with Pytorch and install fairseq
 
 ```
 conda create --name pruning python=3.9
@@ -111,7 +111,7 @@ Please Download [MuST-C-v1](https://docs.google.com/forms/d/e/1FAIpQLSer9jNfUtxb
 
 #### Speech Pre-trained Model 
 
-1. We use HuBERT model for speech pre-trained model for training. Before training, please download the [HuBERT-Base](https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt) model.
+We use HuBERT model for speech pre-trained model for training. Before training, please download the [HuBERT-Base](https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt) model.
 
 
 
