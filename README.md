@@ -129,7 +129,7 @@ We use HuBERT model for speech pre-trained model for training. Before training, 
 
 export CUDA_VISIBLE_DEVICES=1
 target=de
-SAVE_DIR=/workspace/chennan_tmp/s2t/deltalm_data/save_dir/$target/pruning_layer_rate_085_layer6
+SAVE_DIR=/workspace/s2t/deltalm_data/save_dir/$target/pruning_layer_rate_085_layer6
 
 
 data_dir=/workspace/s2t/data/en_de
@@ -165,7 +165,7 @@ fairseq-train $data_dir --text-data $TEXT_DIR --tgt-lang $target \
 
 export CUDA_VISIBLE_DEVICES=1
 target=de
-SAVE_DIR=/workspace/chennan_tmp/s2t/deltalm_data/save_dir/$target/pruning_layer_rate_085_layer6
+SAVE_DIR=/workspace/s2t/deltalm_data/save_dir/$target/pruning_layer_rate_085_layer6
 
 
 data_dir=/workspace/s2t/data/en_de
