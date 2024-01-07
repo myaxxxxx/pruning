@@ -31,7 +31,7 @@ After the review period, we will open-source the code on our GitHub.
 <img src="images/figures3.jpg"/>
 </div>
 
-### Key Implementation
+### Key Implementations
 
 
 - Calculate importance scores for all tokens `npy_tome_layer/models/hubert_transformer_encoder.py Line 1190`;
@@ -68,9 +68,9 @@ if i >= self.pruning_init_layer:
 
 ### More Analysis
 
-#### Q1 Why select pruning rather than merging? 
+#### Why select token pruning rather than token merging? 
 
-[Table 1](./images/table.md)
+[Table 1](./images/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens also consumes additional time; therefore, our proposed method selects token pruning.
 
 
 ### Installations
