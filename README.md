@@ -68,10 +68,27 @@ if i >= self.pruning_init_layer:
 
 ### More Analysis
 
-#### Why select token pruning rather than token merging? 
+#### Q1: Why select token pruning rather than token merging? 
 
 [Table 1](./images/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens also consumes additional time; therefore, our proposed method selects token pruning.
 
+
+
+#### Q2: Why not pruning based on a threshold?
+If a threshold is used, it will result in different numbers of tokens being pruned for each input sequence, rendering the model unable to batch process. If employs a MASK matrix to mask the pruning tokens; however, this approach contradicts the original intention of model acceleration.
+
+#### Q3: Why set a pruning rate instead of a fixed pruning number?
+The differences in patch length for various image inputs are not significant. For example, most images fed into pre-training models have both H and W dimensions set to 224, corresponding to a patch length of 588 (3 × 224 × 224 // 16 ×16). Therefore, a fixed number of tokens can be gradually clipped.
+
+However, the token length for different speech inputs varies significantly. Additionally, the length of speech sequences is much longer than that of corresponding text sequences. Therefore, we select a pruning rate to ensure that longer speech inputs prune more tokens, while shorter ones prune fewer tokens.
+
+### Speech Information Redundancy
+
+<div style="text-align: center">
+<img src="audio/viz.jpg"/>
+</div>
+
+The red boxes indicate pauses in speech. From this figure, it can be observed that there is a lot of redundant information in the content of the speech input.
 
 ### Installations
 
