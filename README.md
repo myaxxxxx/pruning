@@ -66,6 +66,13 @@ if i >= self.pruning_init_layer:
     padding_mask = torch.gather(padding_mask, dim=1, index=true_idx)
 ```
 
+### More Analysis
+
+#### Q1 Why select pruning rather than merging? 
+
+[Table 1](./images/table.md)
+
+
 ### Installations
 
 Create a conda environment with Pytorch and install fairseq
@@ -161,7 +168,7 @@ fairseq-train $data_dir --text-data $TEXT_DIR --tgt-lang $target \
 #### Pruning (schedule pruning rate)
 
 ```
-# key args --pruning-rate --pruning-init-layer --arch
+# key args --pruning-max-rate --pruning-min-rate --pruning-init-layer --arch
 
 export CUDA_VISIBLE_DEVICES=1
 target=de
