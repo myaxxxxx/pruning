@@ -88,7 +88,7 @@ However, the token length for different speech inputs varies significantly. Addi
 <img src="audio/viz.jpg"/>
 </div>
 
-The corresponding audio input is in ```audio/ted_1096_7.wav```. The red boxes indicate pauses in speech. From this figure, it can be observed that there is a lot of redundant information in the content of the speech input.
+Visualization of input audio, the corresponding audio file is in ```audio/ted_1096_7.wav```. From the red boxes of this figure, it can be observed that there is a lot of redundant information in the content of the speech input.
 
 ### Installations
 
