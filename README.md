@@ -28,7 +28,7 @@ After the review period, we will open-source the code on our GitHub.
 ### Calculate Importances Scores
 
 <div style="text-align: center">
-<img src="images/figures3.jpg"/>
+<img src="images/figure3.jpg"/>
 </div>
 
 ### Key Implementations
