@@ -21,14 +21,14 @@ After the review period, we will open-source the code on our GitHub.
 ### Overview
 
 <div style="text-align: center">
-<img src="images/figure2.jpg"/>
+<img src="figures/figure2.jpg"/>
 </div>
 
 
 ### Calculate Importances Scores
 
 <div style="text-align: center">
-<img src="images/figure3.jpg"/>
+<img src="figures/figure3.jpg"/>
 </div>
 
 ### Key Implementations
@@ -70,7 +70,7 @@ if i >= self.pruning_init_layer:
 
 #### Q1: Why use token pruning rather than token merging? 
 
-[Table 1](./images/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens consumes additional time; therefore, our proposed method uses token pruning rather than token merging.
+[Table 1](./figures/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens consumes additional time; therefore, our proposed method uses token pruning rather than token merging.
 
 
 
@@ -93,7 +93,7 @@ Visualization of input audio, the corresponding audio file is in ```audio/ted_10
 ### Loss Curve of Retraining
 The loss curve of retraining, "Conv" represents the utilization of the convolution module. Both pruning and convolution techniques are applied to the sixth layer of the speech pre-trained model.
 <div style="text-align: center">
-<img src="images/loss_curve.jpg"/>
+<img src="figures/loss_curve.jpg"/>
 </div>
 
 ### Installations
