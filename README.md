@@ -21,14 +21,14 @@ After the review period, we will open-source the code on our GitHub.
 ### Overview
 
 <div style="text-align: center">
-<img src="figures/figure2.jpg"/>
+<img src="figures/figure2.jpg" width = "70%"/>
 </div>
 
 
 ### Calculate Importances Scores
 
 <div style="text-align: center">
-<img src="figures/figure3.jpg"/>
+<img src="figures/figure3.jpg" width = "70%"/>
 </div>
 
 ### Key Implementations
@@ -85,7 +85,7 @@ However, the token length for different speech inputs varies significantly. Addi
 ### Speech Information Redundancy
 
 <div style="text-align: center">
-<img src="audio/viz.jpg"/>
+<img src="audio/viz.jpg" width = "80%"/>
 </div>
 
 Visualization of input audio, the corresponding audio file is in ```audio/ted_1096_7.wav```. From the red boxes of this figure, it can be observed that there is a lot of redundant information in the content of the speech input.
@@ -93,7 +93,7 @@ Visualization of input audio, the corresponding audio file is in ```audio/ted_10
 ### Loss Curve of Retraining
 The loss curve of retraining, "Conv" represents the utilization of the convolution module. Both pruning and convolution techniques are applied to the sixth layer of the speech pre-trained model.
 <div style="text-align: center">
-<img src="figures/loss_curve.jpg"/>
+<img src="figures/loss_curve.jpg" width = "50%"/>
 </div>
 
 ### Installations
