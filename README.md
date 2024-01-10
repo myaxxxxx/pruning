@@ -28,7 +28,7 @@ After the review period, we will open-source the code on our GitHub.
 ### Calculate Importances Scores
 
 <div style="text-align: center">
-<img src="figures/figure3.jpg" width = "70%"/>
+<img src="figures/figure3.jpg" width = "50%"/>
 </div>
 
 ### Key Implementations
