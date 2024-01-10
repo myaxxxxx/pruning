@@ -90,6 +90,12 @@ However, the token length for different speech inputs varies significantly. Addi
 
 Visualization of input audio, the corresponding audio file is in ```audio/ted_1096_7.wav```. From the red boxes of this figure, it can be observed that there is a lot of redundant information in the content of the speech input.
 
+### Loss Curve of Retraining
+The loss curve of retraining, "Conv" represents the utilization of the convolution module. Both pruning and convolution techniques are applied to the sixth layer of the speech pre-trained model.
+<div style="text-align: center">
+<img src="images/loss_curve.jpg"/>
+</div>
+
 ### Installations
 
 Create a conda environment with Pytorch and install fairseq
