@@ -52,7 +52,7 @@ if i >= self.pruning_init_layer:
     pruning_scores = attn.view(b, N, N).sum(dim=1)
 
     # calculate the number of remaining tokens
-    left_tokens = math.ceil(self.pruning_rate * (N)) #  N = token_num
+    left_tokens = math.ceil( (1- self.pruning_rate) * (N)) #  N = token_num
 
     x = x.transpose(0, 1)
     # select remaining tokens
@@ -70,7 +70,7 @@ if i >= self.pruning_init_layer:
 
 #### Q1: Why use token pruning rather than token merging? 
 
-[Table ](./figures/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens consumes additional time; therefore, our proposed method uses token pruning rather than token merging.
+[Table](./figures/table.md) presents the specific numerical values for the visualization of Fig. 3 in the paper. It can be observed that the attention scores between many tokens in the table are 0, indicating that there is no mutual influence between some tokens. Furthermore, merging tokens consumes additional time; therefore, our proposed method uses token pruning rather than token merging.
 
 
 
